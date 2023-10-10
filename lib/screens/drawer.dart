@@ -16,7 +16,9 @@ class AppDrawer extends ConsumerWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          SizedBox(height: MediaQuery.of(context).padding.top + 32),
+          Padding(
+            padding: const EdgeInsets.only(left: 24, right: 12),
             child: Row(
               children: [
                 CircleAvatar(
@@ -52,9 +54,10 @@ class AppDrawer extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(height: 64),
           ListTile(
               tileColor: isShowingFavorites ? null : const Color(0xFF143D52),
-              contentPadding: const EdgeInsets.only(left: 48),
+              contentPadding: const EdgeInsets.only(left: 48, top: 8, bottom: 8),
               leading: Image.asset(
                 'assets/icons/home.png',
                 height: 28,
@@ -73,7 +76,7 @@ class AppDrawer extends ConsumerWidget {
               }),
           ListTile(
             tileColor: isShowingFavorites ? const Color(0xFF143D52) : null,
-            contentPadding: const EdgeInsets.only(left: 48),
+            contentPadding: const EdgeInsets.only(left: 48, top: 8, bottom: 8),
             leading: Image.asset(
               'assets/icons/star-outline.png',
               height: 32,
@@ -92,7 +95,7 @@ class AppDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
-            contentPadding: const EdgeInsets.only(left: 48),
+            contentPadding: const EdgeInsets.only(left: 48, top: 8, bottom: 8),
             leading: Image.asset('assets/icons/mail-reply.png', height: 32),
             title: Text(
               'Déconnexion',
