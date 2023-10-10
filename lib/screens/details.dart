@@ -1,5 +1,6 @@
 import 'package:digital_paca_test/models/show.dart';
 import 'package:digital_paca_test/screens/drawer.dart';
+import 'package:digital_paca_test/widgets/hamburger.dart';
 import 'package:digital_paca_test/widgets/show_infos.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -21,7 +22,7 @@ class ShowDetails extends StatelessWidget {
           FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,
             image: show.bannerUrl,
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: MediaQuery.of(context).size.height * 0.46,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
@@ -44,16 +45,7 @@ class ShowDetails extends StatelessWidget {
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             left: 0,
-            child: Builder(builder: (context) {
-              return IconButton(
-                onPressed: () => Scaffold.of(context).openDrawer(),
-                icon: Image.asset(
-                  'assets/icons/menu.png',
-                  color: Colors.white,
-                  height: 28,
-                ),
-              );
-            }),
+            child: const Hamburger(isDetails: true,),
           ),
         ],
       ),

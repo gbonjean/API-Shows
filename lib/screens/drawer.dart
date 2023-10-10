@@ -9,7 +9,7 @@ class AppDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isShowingFavorites = ref.watch(isShowingFavoritesProvider);
+    bool isShowingFavorites = ref.watch(showFavoritesProvider);
 
     return Drawer(
       backgroundColor: const Color(0xFF03A9F4),
@@ -64,12 +64,11 @@ class AppDrawer extends ConsumerWidget {
                 'Home',
                 style: GoogleFonts.roboto(
                   fontSize: 24,
-                  // fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               onTap: () {
-                ref.read(isShowingFavoritesProvider.notifier).change(false);
+                ref.read(showFavoritesProvider.notifier).update((state) => state = false);
                 Navigator.of(context).popUntil(ModalRoute.withName('/home'));
               }),
           ListTile(
@@ -84,12 +83,11 @@ class AppDrawer extends ConsumerWidget {
               'Favoris',
               style: GoogleFonts.roboto(
                 fontSize: 24,
-                // fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
             onTap: () {
-              ref.read(isShowingFavoritesProvider.notifier).change(true);
+              ref.read(showFavoritesProvider.notifier).update((state) => state = true);
               Navigator.of(context).popUntil(ModalRoute.withName('/home'));
             },
           ),
@@ -100,13 +98,12 @@ class AppDrawer extends ConsumerWidget {
               'Déconnexion',
               style: GoogleFonts.roboto(
                 fontSize: 24,
-                // fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
             onTap: () {
               apiService.logout();
-              ref.read(isShowingFavoritesProvider.notifier).change(false);
+              ref.read(showFavoritesProvider.notifier).update((state) => state = false);
               Navigator.of(context).popUntil(ModalRoute.withName('/home'));
             },
           )

@@ -1,7 +1,9 @@
 import 'package:digital_paca_test/services/const.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:digital_paca_test/models/show.dart';
+
+final showsProvider =
+    AsyncNotifierProvider<ShowsNotifier, List<Show>>(() => ShowsNotifier());
 
 class ShowsNotifier extends AsyncNotifier<List<Show>> {
   @override
@@ -19,28 +21,13 @@ class ShowsNotifier extends AsyncNotifier<List<Show>> {
   }
 }
 
-final showsProvider =
-    AsyncNotifierProvider<ShowsNotifier, List<Show>>(() => ShowsNotifier());
-
-class FavoritesNotifier extends Notifier<bool> {
-  @override
-  bool build() {
-    return false;
-  }
-
-  void change(bool value) {
-    state = value;
-  }
-}
-
-final isShowingFavoritesProvider =
-    NotifierProvider<FavoritesNotifier, bool>(() => FavoritesNotifier());
+final showFavoritesProvider = StateProvider<bool>((ref) => false);
 
 final searchProvider = StateProvider<String>((ref) => '');
 
 final filteredShowsProvider = Provider<List<Show>>((ref) {
   final search = ref.watch(searchProvider);
-  final isShowingFavorites = ref.watch(isShowingFavoritesProvider);
+  final isShowingFavorites = ref.watch(showFavoritesProvider);
   final shows = ref.watch(showsProvider);
   if (shows is AsyncData<List<Show>>) {
     return shows.value
