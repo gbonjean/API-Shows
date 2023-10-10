@@ -5,7 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
-  final _dio = Dio();
+  final _dio = Dio(BaseOptions(
+    baseUrl: 'http://46.101.229.177:8080',
+    connectTimeout: const Duration(seconds: 5),
+    receiveTimeout: const Duration(seconds: 3),
+  ));
   final _storage = const FlutterSecureStorage();
   final _authStateController = StreamController<bool>();
   String _token = '';
@@ -23,9 +27,8 @@ class ApiService {
 
   _getTokenFromRefresh(String refreshToken) async {
     try {
-      final response = await _dio.post(
-          'http://46.101.229.177:8080/auth/refresh',
-          data: {'refreshToken': refreshToken});
+      final response = await _dio
+          .post('/auth/refresh', data: {'refreshToken': refreshToken});
       if (response.statusCode == 200) {
         _token = response.data['token'] as String;
         _authStateController.add(true);
@@ -42,7 +45,7 @@ class ApiService {
   Future<String> login(String email, String password) async {
     try {
       final response = await _dio.post(
-        'http://46.101.229.177:8080/auth/login',
+        '/auth/login',
         data: {
           'email': email,
           'password': password,
@@ -57,8 +60,12 @@ class ApiService {
       } else {
         return 'Identifiants incorrects !';
       }
-    } on DioException {
-      return 'Une erreur est survenue... Essayez plus tard !';
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        return 'Identifiants incorrects !';
+      } else {
+        return 'Une erreur est survenue... Essayez plus tard !';
+      }
     }
   }
 
@@ -69,7 +76,7 @@ class ApiService {
   }
 
   Future<List<Show>> getShows() async {
-    final response = await _dio.get('http://46.101.229.177:8080/series',
+    final response = await _dio.get('/series',
         options: Options(
           headers: {'Authorization': 'Bearer $_token'},
         ));

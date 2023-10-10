@@ -22,7 +22,7 @@ class ShowCard extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        margin: const EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 24),
         child: Stack(children: [
           Row(
             children: [
@@ -61,7 +61,6 @@ class ShowCard extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.roboto(
                           fontSize: 14,
-                          // fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],

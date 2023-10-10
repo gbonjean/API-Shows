@@ -51,28 +51,27 @@ class _LoginScreenState extends State<LoginScreen> {
         .hasMatch(input);
   }
 
+  InputDecoration getDecoration(String hint) {
+    return InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+      fillColor: Colors.white,
+      filled: true,
+      hintText: hint,
+      hintStyle: GoogleFonts.roboto(
+        color: const Color(0xFFBDBDBD),
+        fontSize: 18,
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    InputDecoration getDecoration(String hint) {
-      return InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
-        ),
-        fillColor: Colors.white,
-        filled: true,
-        hintText: hint,
-        hintStyle: GoogleFonts.roboto(
-          color: const Color(0xFFBDBDBD),
-          fontSize: 18,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w600,
-        ),
-      );
-    }
-
     return Scaffold(
       backgroundColor: const Color(0xFF03A9F4),
       body: Center(

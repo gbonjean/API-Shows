@@ -48,17 +48,25 @@ class ShowInfos extends StatelessWidget {
               color: Colors.white,
             ),
             const SizedBox(width: 24),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(show.director, style: infosStyle),
-                const SizedBox(height: 8),
-                Text(show.year, style: infosStyle),
-                const SizedBox(height: 8),
-                Text(show.type, style: infosStyle),
-                const SizedBox(height: 8),
-                Text('${show.duration} min', style: infosStyle),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    show.director,
+                    style: infosStyle,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(show.year, style: infosStyle),
+                  const SizedBox(height: 8),
+                  Text(show.type, style: infosStyle),
+                  const SizedBox(height: 8),
+                  Text('${show.duration} min', style: infosStyle),
+                ],
+              ),
             )
           ],
         ),
