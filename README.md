@@ -2,7 +2,7 @@
 
 Demo Display of a TV shows app.
 
-* API service
+* functional API service
 * Full login system with auth stream and refresh token storage
 * Local favorite system
 * Search bar
